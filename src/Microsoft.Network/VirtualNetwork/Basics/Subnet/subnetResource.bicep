@@ -5,7 +5,13 @@ param virtualNetworkName string
 param name string
 
 @description('Subnet Address Prefix')
-param addressPrefix string
+param addressPrefix array
+
+@description('Private Subnet')
+param privateSubnet string
+
+@description('Private Endpoint network policies')
+param privateEndpointNetworkPolicies string
 
 @description('Virtual Network Resource')
 resource virtualNetwork 'Microsoft.Network/virtualNetworks@2024-05-01' existing = {
@@ -17,6 +23,8 @@ resource subnet 'Microsoft.Network/virtualNetworks/subnets@2021-02-01' = {
   name: '${name}-${uniqueString(virtualNetwork.id, name)}-subnet}'
   parent: virtualNetwork
   properties: {
-    addressPrefix: addressPrefix
+    addressPrefixes: addressPrefix
+    privateLinkServiceNetworkPolicies: privateSubnet
+    privateEndpointNetworkPolicies: privateEndpointNetworkPolicies
   }
 }
