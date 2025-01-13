@@ -21,7 +21,11 @@ param location string = resourceGroup().location
 param kind string
 
 @description('App Service Plan SKU')
-param sku object 
+param sku object = {
+  name: 'P1V3'
+  tier: 'PremiumV3'
+  capacity: 1
+}
 
 @description('Tags')
 param tags object
@@ -33,10 +37,7 @@ resource appServicePlan 'Microsoft.Web/serverfarms@2023-12-01' = {
   sku: sku
   kind: 'linux'
   properties: {
-    reserved: (contains(kind,'linux')) ? true : false
+    reserved: (contains(kind, 'linux')) ? true : false
   }
   tags: tags
 }
-
-@description('App Service Plan Id')
-output appServicePlanId string = appServicePlan.id

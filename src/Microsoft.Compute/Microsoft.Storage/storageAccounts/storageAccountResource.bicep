@@ -31,7 +31,7 @@ param kind string
 param accessTier string
 
 @description('Storage account tags')
-param tags object 
+param tags object
 
 @description('Deploy Storage account resource to Azure')
 resource storageAccount 'Microsoft.Storage/storageAccounts@2023-05-01' = {

@@ -22,4 +22,3 @@ resource storageAccountContainer 'Microsoft.Storage/storageAccounts/blobServices
   name: name
   parent: blobService
 }
-

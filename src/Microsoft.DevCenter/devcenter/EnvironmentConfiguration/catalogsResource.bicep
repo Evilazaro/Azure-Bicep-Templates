@@ -22,7 +22,7 @@ param tags object
 param type string
 
 @description('Catalog Type')
-param uri string 
+param uri string
 
 @description('Catalog Branch')
 param branch string
@@ -43,27 +43,19 @@ resource devCenterCatalog 'Microsoft.DevCenter/devcenters/catalogs@2024-10-01-pr
   properties: {
     tags: tags
     syncType: syncType
-    gitHub: (type == 'GitHub' ? {
-        uri: uri
-        branch: branch
-        path: path
-    } : null)
-    adoGit: (type == 'AzureDevOps' ? {
-        uri: uri
-        branch: branch
-        path: path
-    } : null)
+    gitHub: (type == 'GitHub'
+      ? {
+          uri: uri
+          branch: branch
+          path: path
+        }
+      : null)
+    adoGit: (type == 'AzureDevOps'
+      ? {
+          uri: uri
+          branch: branch
+          path: path
+        }
+      : null)
   }
 }
-
-@description('Catalog Resource ID')
-output id string = devCenterCatalog.id
-
-@description('Catalog Resource Name')
-output catalogName string = devCenterCatalog.name
-
-@description('Catalog Resource Tags')
-output catalogTags object = devCenterCatalog.properties.tags
-
-@description('Catalog Resource Sync Type')
-output catalogSyncType string = devCenterCatalog.properties.syncType

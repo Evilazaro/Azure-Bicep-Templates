@@ -18,12 +18,3 @@ resource environmentType 'Microsoft.DevCenter/devcenters/environmentTypes@2024-1
   parent: devCenter
   tags: tags
 }
-
-@description('Environment Type Resource ID')
-output environmentTypeId string = environmentType.id
-
-@description('Environment Type Resource Name')
-output environmentTypeName string = environmentType.name
-
-@description('Environment Type Resource Tags')
-output environmentTypeTags object = environmentType.tags

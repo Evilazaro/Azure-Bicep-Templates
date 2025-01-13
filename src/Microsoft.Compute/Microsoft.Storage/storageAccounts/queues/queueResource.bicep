@@ -21,4 +21,3 @@ resource storageQueue 'Microsoft.Storage/storageAccounts/queueServices/queues@20
   name: name
   parent: storageQueueService
 }
-
