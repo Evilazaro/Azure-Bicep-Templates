@@ -10,9 +10,6 @@ param environmentTypes ProjectEnvironmentType[]
 @description('Project Catalogs')
 param catalogs Catalog[]
 
-@description('Project Tags')
-param tags object = {}
-
 type ProjectEnvironmentType = {
   name: string
   identity: Identity
@@ -42,7 +39,6 @@ type CatalogType = 'gitHub' | 'adoGit'
 resource project 'Microsoft.DevCenter/projects@2024-10-01-preview' = {
   name: name
   location: resourceGroup().location
-  tags: tags
   properties: {
     devCenterId: devCenterId
   }

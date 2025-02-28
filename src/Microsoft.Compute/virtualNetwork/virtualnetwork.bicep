@@ -9,14 +9,10 @@ param addressPrefixes array = [
   '10.0.0.0/16'
 ]
 
-@description('Tags of the virtual network.')
-param tags object = {}
-
 @description('Virtual Network Resource')
 resource virtualNetwork 'Microsoft.Network/virtualNetworks@2024-05-01' = {
   name: name
   location: location
-  tags: tags
   properties: {
     addressSpace: {
       addressPrefixes: addressPrefixes

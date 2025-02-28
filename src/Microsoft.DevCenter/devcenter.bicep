@@ -4,9 +4,6 @@ param settings Settings
 @description('Dev Center Identity')
 param identity Identity
 
-@description('Tags of the Dev Center resource.')
-param tags object = {}
-
 @description('Dev Center Settings')
 type Settings = {
   name: string
@@ -59,7 +56,6 @@ type ProjectEnvironmentType = {
 resource devcenter 'Microsoft.DevCenter/devcenters@2024-10-01-preview' = {
   name: settings.name
   location: settings.location
-  tags: tags
   properties: {
     projectCatalogSettings: {
       catalogItemSyncEnableStatus: settings.catalogItemSyncEnableStatus
@@ -115,7 +111,6 @@ module devCenterEnvironmentTypes 'environmentType.bicep' = [
     params: {
       name: environmentType.name
       devCenterName: devcenter.name
-      tags: environmentType.tags
     }
   }
 ]
@@ -137,7 +132,6 @@ module devCenterProjects 'project.bicep' = [
       devCenterId: devcenter.id
       environmentTypes: project.environmentTypes
       catalogs: project.catalogs
-      tags: project.tags
     }
   }
 ]
