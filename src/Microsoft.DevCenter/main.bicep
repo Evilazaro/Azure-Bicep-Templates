@@ -12,7 +12,6 @@ var devCenterSettings = loadYamlContent('./devcenter.yaml')
 resource rg 'Microsoft.Resources/resourceGroups@2024-11-01' = {
   name: rgName
   location: location
-  tags: devCenterSettings.tags
 }
 
 @description('Dev Center Module')
@@ -22,7 +21,6 @@ module devCenter 'devcenter.bicep' = {
   params: {
     settings: devCenterSettings
     identity: devCenterSettings.identity
-    tags: devCenterSettings.tags
   }
 }
 

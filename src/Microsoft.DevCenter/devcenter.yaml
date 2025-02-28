@@ -7,9 +7,6 @@ microsoftHostedNetworkEnableStatus: Enabled
 installAzureMonitorAgentEnableStatus: Enabled
 identity:
   type: SystemAssigned
-tags:
-  tag1: value1
-  tag2: value2
 catalogs:
   - name: catalog
     type: gitHub
@@ -24,14 +21,6 @@ catalogs:
 environmentTypes:
   - name: dev
     displayName: Development Environment
-    tags:
-      tag1: value1
-      tag2: value2
-  - name: prod
-    displayName: Production Environment
-    tags:
-      tag1: value1
-      tag2: value2
 projects:
   - name: project1
     description: Project 1 Description
@@ -41,26 +30,8 @@ projects:
         uri: https://github.com/Evilazaro/IdentityProvider.git
         branch: main
         path: ./path/to/catalog1
-      - name: catalog2
-        type: gitHub
-        uri: https://github.com/Evilazaro/IdentityProvider.git
-        branch: main
-        path: ./path/to/catalog2
     environmentTypes:
       - name: dev
         identity:
           type: SystemAssigned
-        deploymentTargetId: ''
-        tags:
-          tag1: value1
-          tag2: value2
-      - name: prod
-        identity:
-          type: SystemAssigned
-        deploymentTargetId: ''
-        tags:
-          tag1: value1
-          tag2: value2
-    tags:	
-      tag1: value1
-      tag2: value2
+        deploymentTargetId: 'your-deployment-target-id'

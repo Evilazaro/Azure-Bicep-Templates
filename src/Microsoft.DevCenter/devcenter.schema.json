@@ -62,11 +62,6 @@
       "items": {
         "$ref": "#/definitions/project"
       }
-    },
-    "tags": {
-      "type": "object",
-      "title": "The tags to automatically apply to deployed environments",
-      "additionalProperties": true
     }
   },
   "definitions": {
@@ -150,16 +145,12 @@
           "items": {
             "$ref": "#/definitions/catalog"
           }
-        },
-        "tags": {
-          "type": "object",
-          "title": "The tags to automatically apply to deployed environments",
-          "additionalProperties": true
         }
       },
       "required": [
         "name",
-        "description"
+        "description",
+        "catalogs"
       ]
     },
     "environmentType": {
@@ -172,11 +163,6 @@
         "displayName": {
           "type": "string",
           "description": "The display of the environment type."
-        },
-        "tags": {
-          "type": "object",
-          "title": "The tags to automatically apply to deployed environments",
-          "additionalProperties": true
         }
       },
       "required": [
@@ -202,25 +188,8 @@
         "deploymentTargetId": {
           "type": "string",
           "title": "The Azure subscription id to deploy environments"
-        },
-        "tags": {
-          "type": "object",
-          "title": "The tags to automatically apply to deployed environments",
-          "additionalProperties": true
         }
       }
     }
-  },
-  "required": [
-    "name",
-    "location",
-    "catalogItemSyncEnableStatus",
-    "microsoftHostedNetworkEnableStatus",
-    "installAzureMonitorAgentEnableStatus",
-    "identity",
-    "catalogs",
-    "environmentTypes",
-    "projects",
-    "tags"
-  ]
+  }
 }

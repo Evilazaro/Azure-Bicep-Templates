@@ -40,7 +40,6 @@ type CatalogType = 'gitHub' | 'adoGit'
 type EnvironmentType = {
   name: string
   displayName: string
-  tags: object
 }
 
 type Project = {
@@ -48,17 +47,12 @@ type Project = {
   description: string
   catalogs: Catalog[]
   environmentTypes: ProjectEnvironmentType[]
-  tags: Tag
 }
 
 type ProjectEnvironmentType = {
   name: string
+  identity: Identity
   deploymentTargetId: string
-}
-
-type Tag = {
-  name: string
-  value: string
 }
 
 @description('Dev Center Resource')
