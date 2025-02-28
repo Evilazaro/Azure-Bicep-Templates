@@ -35,30 +35,32 @@ environmentTypes:
 projects:
   - name: project1
     description: Project 1 Description
+    catalogs:
+      - name: catalog
+        type: gitHub
+        uri: https://github.com/Evilazaro/IdentityProvider.git
+        branch: main
+        path: ./path/to/catalog1
+      - name: catalog2
+        type: gitHub
+        uri: https://github.com/Evilazaro/IdentityProvider.git
+        branch: main
+        path: ./path/to/catalog2
     environmentTypes:
       - name: dev
         identity:
           type: SystemAssigned
         deploymentTargetId: ''
+        tags:
+          tag1: value1
+          tag2: value2
       - name: prod
         identity:
           type: SystemAssigned
         deploymentTargetId: ''
-  - name: project2
-    description: Project 2 Description
-    environmentTypes:
-      - name: dev
-        identity:
-          type: SystemAssigned
-        deploymentTargetId: ''
-  - name: project3
-    description: Project 3 Description
-    environmentTypes:
-      - name: dev
-        identity:
-          type: SystemAssigned
-        deploymentTargetId: ''
-      - name: prod
-        identity:
-          type: SystemAssigned
-        deploymentTargetId: ''
+        tags:
+          tag1: value1
+          tag2: value2
+    tags:	
+      tag1: value1
+      tag2: value2

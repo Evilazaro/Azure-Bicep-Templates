@@ -142,6 +142,19 @@
           "items": {
             "$ref": "#/definitions/projectEnvironmentType"
           }
+        },
+        "catalogs": {
+          "type": "array",
+          "description": "List of catalogs for the project.",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/catalog"
+          }
+        },
+        "tags": {
+          "type": "object",
+          "title": "The tags to automatically apply to deployed environments",
+          "additionalProperties": true
         }
       },
       "required": [
@@ -189,6 +202,11 @@
         "deploymentTargetId": {
           "type": "string",
           "title": "The Azure subscription id to deploy environments"
+        },
+        "tags": {
+          "type": "object",
+          "title": "The tags to automatically apply to deployed environments",
+          "additionalProperties": true
         }
       }
     }
