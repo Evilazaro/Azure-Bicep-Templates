@@ -29,7 +29,7 @@ resource devcenter 'Microsoft.DevCenter/devcenters@2024-10-01-preview' existing 
 @description('Catalog Resource')
 resource catalog 'Microsoft.DevCenter/devcenters/catalogs@2024-10-01-preview' = {
   name: name
-  parent: devcenter 
+  parent: devcenter
   properties: type == 'gitHub'
     ? {
         gitHub: {

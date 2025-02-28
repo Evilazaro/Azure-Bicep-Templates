@@ -31,7 +31,7 @@ projects:
         branch: main
         path: ./path/to/catalog1
     environmentTypes:
-      - name: dev      
+      - name: dev
         identity:
           type: SystemAssigned
-        deploymentTargetId: ''
+        deploymentTargetId: ""

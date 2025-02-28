@@ -78,7 +78,7 @@ output microsoftHostedNetworkEnableStatus string = devcenter.properties.networkS
 output installAzureMonitorAgentEnableStatus string = devcenter.properties.devBoxProvisioningSettings.installAzureMonitorAgentEnableStatus
 
 @description('Dev Center Catalogs')
-module devCenterCatalogs 'catalog.bicep' = [
+module devCenterCatalogs './settings/catalog.bicep' = [
   for catalog in settings.catalogs: {
     name: 'catalog-${catalog.name}'
     scope: resourceGroup()
@@ -103,7 +103,7 @@ output catalogs array = [
 ]
 
 @description('Dev Center Environment Types')
-module devCenterEnvironmentTypes 'environmentType.bicep' = [
+module devCenterEnvironmentTypes './settings/environmentType.bicep' = [
   for environmentType in settings.environmentTypes: {
     name: 'environmentType-${environmentType.name}'
     scope: resourceGroup()
@@ -121,7 +121,7 @@ output environmentTypes array = [
 ]
 
 @description('Dev Center Projects')
-module devCenterProjects 'project.bicep' = [
+module devCenterProjects 'projects/project.bicep' = [
   for project in settings.projects: {
     name: 'project-${project.name}'
     scope: resourceGroup()

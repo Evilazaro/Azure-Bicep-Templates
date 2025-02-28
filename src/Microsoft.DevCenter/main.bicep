@@ -6,7 +6,7 @@ param rgName string
 @description('Location')
 param location string = 'eastus2'
 
-var devCenterSettings = loadYamlContent('./devcenter.yaml')
+var devCenterSettings = loadYamlContent('./settings/devcenter.yaml')
 
 @description('Resource Group')
 resource rg 'Microsoft.Resources/resourceGroups@2024-11-01' = {
