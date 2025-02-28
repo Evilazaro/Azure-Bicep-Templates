@@ -1,6 +1,9 @@
 @description('Name of the Catalog')
 param name string
 
+@description('Project Name')
+param projectName string
+
 @description('Type of the Catalog')
 @allowed([
   'gitHub'
@@ -17,19 +20,15 @@ param branch string
 @description('Path of the Catalog')
 param path string
 
-@description('Dev Center Name')
-param devCenterName string
-
-@description('Dev Center Resource')
-resource devcenter 'Microsoft.DevCenter/devcenters@2024-10-01-preview' existing = {
-  name: devCenterName
+resource project 'Microsoft.DevCenter/projects@2024-10-01-preview' existing = {
+  name: projectName
   scope: resourceGroup()
 }
 
 @description('Catalog Resource')
-resource catalog 'Microsoft.DevCenter/devcenters/catalogs@2024-10-01-preview' = {
+resource catalog 'Microsoft.DevCenter/projects/catalogs@2024-10-01-preview' = {
   name: name
-  parent: devcenter 
+  parent: project
   properties: type == 'gitHub'
     ? {
         gitHub: {

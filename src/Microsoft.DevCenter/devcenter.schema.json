@@ -37,28 +37,7 @@
     },
     "identity": {
       "type": "object",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "The type of identity.",
-          "enum": [
-            "None",
-            "SystemAssigned",
-            "UserAssigned",
-            "SystemAssigned, UserAssigned"
-          ]
-        },
-        "userAssignedIdentities": {
-          "type": "array",
-          "description": "List of user-assigned identities.",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "type"
-      ]
+      "$ref": "#/definitions/identity"
     },
     "catalogs": {
       "type": "array",
@@ -66,6 +45,14 @@
       "minItems": 1,
       "items": {
         "$ref": "#/definitions/catalog"
+      }
+    },
+    "environmentTypes": {
+      "type": "array",
+      "description": "List of environment types.",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/definitions/environmentType"
       }
     },
     "projects": {
@@ -78,6 +65,24 @@
     }
   },
   "definitions": {
+    "identity": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of identity.",
+          "enum": [
+            "None",
+            "SystemAssigned",
+            "UserAssigned",
+            "SystemAssigned, UserAssigned"
+          ]
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
     "catalog": {
       "type": "object",
       "properties": {
@@ -115,7 +120,7 @@
       ]
     },
     "project": {
-      "type":"object",
+      "type": "object",
       "properties": {
         "name": {
           "type": "string",
@@ -124,21 +129,62 @@
         "description": {
           "type": "string",
           "description": "The description of the project."
+        },
+        "environmentTypes": {
+          "type": "array",
+          "title": "The environment types for the project",
+          "description": "The environment types must be defined in the environmentTypes section of the DevCenter configuration file.",
+          "items": {
+            "$ref": "#/definitions/projectEnvironmentType"
+          }
+        },
+        "catalogs": {
+          "type": "array",
+          "description": "List of catalogs for the project.",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/definitions/catalog"
+          }
         }
       },
       "required": [
         "name",
-        "description"
+        "description",
+        "catalogs"
       ]
+    },
+    "environmentType": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the environment type."
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "projectEnvironmentType": {
+      "type": "object",
+      "required": [
+        "name",
+        "deploymentTargetId"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "The name of the environment type"
+        },
+        "identity": {
+          "type": "object",
+          "$ref": "#/definitions/identity"
+        },
+        "deploymentTargetId": {
+          "type": "string",
+          "title": "The Azure subscription id to deploy environments"
+        }
+      }
     }
-  },
-  "required": [
-    "name",
-    "location",
-    "catalogItemSyncEnableStatus",
-    "microsoftHostedNetworkEnableStatus",
-    "installAzureMonitorAgentEnableStatus",
-    "identity",
-    "catalogs"
-  ]
+  }
 }

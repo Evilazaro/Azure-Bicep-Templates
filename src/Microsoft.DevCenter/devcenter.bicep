@@ -4,12 +4,6 @@ param settings Settings
 @description('Dev Center Identity')
 param identity Identity
 
-@description('Cataglogs')
-param catalogs Catalog[]
-
-@description('Projects')
-param projects Project[]
-
 @description('Dev Center Settings')
 type Settings = {
   name: string
@@ -17,6 +11,9 @@ type Settings = {
   catalogItemSyncEnableStatus: string
   microsoftHostedNetworkEnableStatus: string
   installAzureMonitorAgentEnableStatus: string
+  catalogs: Catalog[]
+  environmentTypes: EnvironmentType[]
+  projects: Project[]
 }
 
 @description('Dev Center Identity')
@@ -37,9 +34,21 @@ type Catalog = {
 
 type CatalogType = 'gitHub' | 'adoGit'
 
+type EnvironmentType = {
+  name: string
+}
+
 type Project = {
   name: string
   description: string
+  catalogs: Catalog[]
+  environmentTypes: ProjectEnvironmentType[]
+}
+
+type ProjectEnvironmentType = {
+  name: string
+  identity: Identity
+  deploymentTargetId: string
 }
 
 @description('Dev Center Resource')
@@ -70,7 +79,7 @@ output installAzureMonitorAgentEnableStatus string = devcenter.properties.devBox
 
 @description('Dev Center Catalogs')
 module devCenterCatalogs 'catalog.bicep' = [
-  for catalog in catalogs: {
+  for catalog in settings.catalogs: {
     name: 'catalog-${catalog.name}'
     scope: resourceGroup()
     params: {
@@ -85,7 +94,7 @@ module devCenterCatalogs 'catalog.bicep' = [
 ]
 
 output catalogs array = [
-  for (catalog, i) in catalogs: {
+  for (catalog, i) in settings.catalogs: {
     name: devCenterCatalogs[i].outputs.name
     type: devCenterCatalogs[i].outputs.type
     uri: devCenterCatalogs[i].outputs.uri
@@ -93,14 +102,40 @@ output catalogs array = [
   }
 ]
 
+@description('Dev Center Environment Types')
+module devCenterEnvironmentTypes 'environmentType.bicep' = [
+  for environmentType in settings.environmentTypes: {
+    name: 'environmentType-${environmentType.name}'
+    scope: resourceGroup()
+    params: {
+      name: environmentType.name
+      devCenterName: devcenter.name
+    }
+  }
+]
+
+output environmentTypes array = [
+  for (environmentType, i) in settings.environmentTypes: {
+    name: devCenterEnvironmentTypes[i].outputs.name
+  }
+]
+
 @description('Dev Center Projects')
 module devCenterProjects 'project.bicep' = [
-  for project in projects: {
+  for project in settings.projects: {
     name: 'project-${project.name}'
     scope: resourceGroup()
     params: {
       name: project.name
       devCenterId: devcenter.id
+      environmentTypes: project.environmentTypes
+      catalogs: project.catalogs
     }
+  }
+]
+
+output projects array = [
+  for (project, i) in settings.projects: {
+    name: devCenterProjects[i].outputs.name
   }
 ]
