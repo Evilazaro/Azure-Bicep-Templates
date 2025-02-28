@@ -61,7 +61,7 @@ output microsoftHostedNetworkEnableStatus string = devcenter.properties.networkS
 output installAzureMonitorAgentEnableStatus string = devcenter.properties.devBoxProvisioningSettings.installAzureMonitorAgentEnableStatus
 
 @description('Dev Center Catalogs')
-module devCenterCatalog 'catalog.bicep' = [
+module devCenterCatalogs 'catalog.bicep' = [
   for catalog in catalogs: {
     name: 'catalog-${catalog.name}'
     scope: resourceGroup()
