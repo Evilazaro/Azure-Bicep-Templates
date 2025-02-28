@@ -20,7 +20,7 @@ catalogs:
     path: ./path/to/catalog2
 environmentTypes:
   - name: dev
-    displayName: Development Environment
+  - name: prod
 projects:
   - name: project1
     description: Project 1 Description
@@ -31,7 +31,7 @@ projects:
         branch: main
         path: ./path/to/catalog1
     environmentTypes:
-      - name: dev
+      - name: dev      
         identity:
           type: SystemAssigned
-        deploymentTargetId: 'your-deployment-target-id'
+        deploymentTargetId: ''

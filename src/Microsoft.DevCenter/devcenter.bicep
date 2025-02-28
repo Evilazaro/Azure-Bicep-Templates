@@ -36,7 +36,6 @@ type CatalogType = 'gitHub' | 'adoGit'
 
 type EnvironmentType = {
   name: string
-  displayName: string
 }
 
 type Project = {
@@ -118,7 +117,6 @@ module devCenterEnvironmentTypes 'environmentType.bicep' = [
 output environmentTypes array = [
   for (environmentType, i) in settings.environmentTypes: {
     name: devCenterEnvironmentTypes[i].outputs.name
-    displayName: devCenterEnvironmentTypes[i].outputs.displayName
   }
 ]
 

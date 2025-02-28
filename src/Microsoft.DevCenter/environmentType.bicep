@@ -14,10 +14,6 @@ resource devcenter 'Microsoft.DevCenter/devcenters@2024-10-01-preview' existing 
 resource environmentType 'Microsoft.DevCenter/devcenters/environmentTypes@2024-10-01-preview' = {
   name: name
   parent: devcenter
-  properties: {
-    displayName: name
-  }
 }
 
 output name string = environmentType.name
-output displayName string = environmentType.properties.displayName

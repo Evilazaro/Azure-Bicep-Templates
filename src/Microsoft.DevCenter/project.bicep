@@ -13,7 +13,6 @@ param catalogs Catalog[]
 type ProjectEnvironmentType = {
   name: string
   identity: Identity
-  displayName: string
   deploymentTargetId: string
 }
 
@@ -64,7 +63,6 @@ module envvironmentType 'projectEnvironmentType.bicep' = [
 output environmentType array = [
   for environmentType in environmentTypes: {
     name: environmentType.name
-    displayName: environmentType.displayName
     deploymentTargetId: environmentType.deploymentTargetId
     identity: environmentType.identity
   }

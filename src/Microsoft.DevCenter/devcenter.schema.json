@@ -159,15 +159,10 @@
         "name": {
           "type": "string",
           "description": "The name of the environment type."
-        },
-        "displayName": {
-          "type": "string",
-          "description": "The display of the environment type."
         }
       },
       "required": [
-        "name",
-        "displayName"
+        "name"
       ]
     },
     "projectEnvironmentType": {

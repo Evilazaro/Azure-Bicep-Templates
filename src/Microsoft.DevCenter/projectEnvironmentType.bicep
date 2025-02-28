@@ -24,12 +24,10 @@ resource envvironmentType 'Microsoft.DevCenter/projects/environmentTypes@2024-10
     type: identityType
   }
   properties: {
-    displayName: name
     deploymentTargetId: (!empty(deploymentTargetId) ? deploymentTargetId : subscription().id)
   }
 }
 
 output name string = envvironmentType.name
-output displayName string = envvironmentType.properties.displayName
 output deploymentTargetId string = envvironmentType.properties.deploymentTargetId
 output identity object = envvironmentType.identity
