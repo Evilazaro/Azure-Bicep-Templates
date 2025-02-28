@@ -4,7 +4,7 @@ param settings Settings
 @description('Dev Center Identity')
 param identity Identity
 
-@description('Dev Center Catalogs')
+@description('Cataglogs')
 param catalogs Catalog
 
 @description('Dev Center Settings')
@@ -21,13 +21,18 @@ type Identity = {
   type: string
 }
 
+@description('Cataglogs')
 type Catalog = [
   {
     name: string
+    type: CatalogType
+    uri: string
+    branch: string
     path: string
-    sync: bool
   }
 ]
+
+type CatalogType = 'gitHub' | 'adoGit'
 
 @description('Dev Center Resource')
 resource devcenter 'Microsoft.DevCenter/devcenters@2024-10-01-preview' = {
@@ -54,3 +59,19 @@ output location string = devcenter.location
 output catalogItemSyncEnableStatus string = devcenter.properties.projectCatalogSettings.catalogItemSyncEnableStatus
 output microsoftHostedNetworkEnableStatus string = devcenter.properties.networkSettings.microsoftHostedNetworkEnableStatus
 output installAzureMonitorAgentEnableStatus string = devcenter.properties.devBoxProvisioningSettings.installAzureMonitorAgentEnableStatus
+
+@description('Dev Center Catalogs')
+module devCenterCatalog 'catalog.bicep' = [
+  for catalog in catalogs: {
+    name: 'catalog-${catalog.name}'
+    scope: resourceGroup()
+    params: {
+      name: catalog.name
+      branch: catalog.branch
+      devCenterName: devcenter.name
+      path: catalog.path
+      type: catalog.type
+      uri: catalog.uri
+    }
+  }
+]

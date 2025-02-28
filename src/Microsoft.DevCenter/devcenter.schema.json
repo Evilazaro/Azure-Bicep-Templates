@@ -1,98 +1,112 @@
 {
-    "$schema": "http://json-schema.org/draft-07/schema#",
-    "title": "DevCenter Configuration",
-    "type": "object",
-    "properties": {
-        "name": {
-            "type": "string",
-            "description": "The name of the Dev Center."
-        },
-        "location": {
-            "type": "string",
-            "description": "The location of the Dev Center."
-        },
-        "catalogItemSyncEnableStatus": {
-            "type": "string",
-            "description": "Enable catalogs per project.",
-            "enum": [
-                "Enabled",
-                "Disabled"
-            ]
-        },
-        "microsoftHostedNetworkEnableStatus": {
-            "type": "string",
-            "description": "Enable Microsoft hosted network.",
-            "enum": [
-                "Enabled",
-                "Disabled"
-            ]
-        },
-        "installAzureMonitorAgentEnableStatus": {
-            "type": "string",
-            "description": "Enable installation of Azure Monitor Agent.",
-            "enum": [
-                "Enabled",
-                "Disabled"
-            ]
-        },
-        "identity": {
-            "type": "object",
-            "properties": {
-                "type": {
-                    "type": "string",
-                    "description": "The type of identity.",
-                    "enum": [
-                        "None",
-                        "SystemAssigned",
-                        "UserAssigned"
-                    ]
-                },
-                "userAssignedIdentities": {
-                    "type": "array",
-                    "description": "List of user-assigned identities.",
-                    "items": {
-                        "type": "string"
-                    }
-                }
-            },
-            "required": [
-                "type"
-            ]
-        },
-        "catalogs": {
-            "type": "array",
-            "description": "List of catalogs.",
-            "items": {
-                "type": "object",
-                "properties": {
-                    "name": {
-                        "type": "string",
-                        "description": "The name of the catalog."
-                    },
-                    "path": {
-                        "type": "string",
-                        "description": "The path to the catalog."
-                    },
-                    "sync": {
-                        "type": "boolean",
-                        "description": "Whether the catalog is synchronized."
-                    }
-                },
-                "required": [
-                    "name",
-                    "path",
-                    "sync"
-                ]
-            }
-        }
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "DevCenter Configuration",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "The name of the Dev Center."
     },
-    "required": [
-        "name",
-        "location",
-        "catalogItemSyncEnableStatus",
-        "microsoftHostedNetworkEnableStatus",
-        "installAzureMonitorAgentEnableStatus",
-        "identity",
-        "catalogs"
-    ]
+    "location": {
+      "type": "string",
+      "description": "The location of the Dev Center."
+    },
+    "catalogItemSyncEnableStatus": {
+      "type": "string",
+      "description": "Enable catalogs per project.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ]
+    },
+    "microsoftHostedNetworkEnableStatus": {
+      "type": "string",
+      "description": "Enable Microsoft hosted network.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ]
+    },
+    "installAzureMonitorAgentEnableStatus": {
+      "type": "string",
+      "description": "Enable installation of Azure Monitor Agent.",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ]
+    },
+    "identity": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of identity.",
+          "enum": [
+            "None",
+            "SystemAssigned",
+            "UserAssigned"
+          ]
+        },
+        "userAssignedIdentities": {
+          "type": "array",
+          "description": "List of user-assigned identities.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "catalogs": {
+      "type": "array",
+      "description": "List of catalogs.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "The name of the catalog."
+          },
+          "type": {
+            "type": "string",
+            "description": "The type of the catalog.",
+            "enum": [
+              "gitHub",
+              "adoGit"
+            ]
+          },
+          "uri": {
+            "type": "string",
+            "description": "The URI of the catalog."
+          },
+          "branch": {
+            "type": "string",
+            "description": "The branch of the catalog."
+          },
+          "path": {
+            "type": "string",
+            "description": "The path to the catalog."
+          }
+        },
+        "required": [
+          "name",
+          "type",
+          "uri",
+          "branch",
+          "path"
+        ]
+      }
+    }
+  },
+  "required": [
+    "name",
+    "location",
+    "catalogItemSyncEnableStatus",
+    "microsoftHostedNetworkEnableStatus",
+    "installAzureMonitorAgentEnableStatus",
+    "identity",
+    "catalogs"
+  ]
 }

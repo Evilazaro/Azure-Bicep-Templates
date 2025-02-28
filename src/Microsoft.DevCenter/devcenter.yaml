@@ -10,8 +10,12 @@ identity:
   userAssignedIdentities: []
 catalogs:
   - name: catalog
-    path: http://www.path.com
-    sync: true
+    type: gitHub
+    uri: http://www.path.com
+    branch: main
+    path: ./devcenter.schema.json
   - name: catalog2
-    path: http://www.path2.com
-    sync: false
+    type: gitHub
+    uri: http://www.path2.com
+    branch: main
+    path: ./devcenter.schema.json
