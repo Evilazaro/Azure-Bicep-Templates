@@ -22,6 +22,7 @@ module devCenter 'devcenter.bicep' = {
     settings: devCenterSettings
     identity: devCenterSettings.identity
     catalogs: devCenterSettings.catalogs
+    projects: devCenterSettings.projects
   }
 }
 

@@ -67,6 +67,14 @@
       "items": {
         "$ref": "#/definitions/catalog"
       }
+    },
+    "projects": {
+      "type": "array",
+      "description": "List of projects.",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/definitions/project"
+      }
     }
   },
   "definitions": {
@@ -104,6 +112,23 @@
         "uri",
         "branch",
         "path"
+      ]
+    },
+    "project": {
+      "type":"object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the project."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the project."
+        }
+      },
+      "required": [
+        "name",
+        "description"
       ]
     }
   },

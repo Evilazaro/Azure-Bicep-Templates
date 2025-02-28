@@ -7,6 +7,9 @@ param identity Identity
 @description('Cataglogs')
 param catalogs Catalog[]
 
+@description('Projects')
+param projects Project[]
+
 @description('Dev Center Settings')
 type Settings = {
   name: string
@@ -33,6 +36,11 @@ type Catalog = {
 }
 
 type CatalogType = 'gitHub' | 'adoGit'
+
+type Project = {
+  name: string
+  description: string
+}
 
 @description('Dev Center Resource')
 resource devcenter 'Microsoft.DevCenter/devcenters@2024-10-01-preview' = {
@@ -82,5 +90,17 @@ output catalogs array = [
     type: devCenterCatalogs[i].outputs.type
     uri: devCenterCatalogs[i].outputs.uri
     branch: devCenterCatalogs[i].outputs.branch
+  }
+]
+
+@description('Dev Center Projects')
+module devCenterProjects 'project.bicep' = [
+  for project in projects: {
+    name: 'project-${project.name}'
+    scope: resourceGroup()
+    params: {
+      name: project.name
+      devCenterId: devcenter.id
+    }
   }
 ]
