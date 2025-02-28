@@ -1,21 +1,21 @@
 # yaml-language-server: $schema=./devcenter.schema.json
 
-name: devcenter
+name: devcenter2
 location: eastus
 catalogItemSyncEnableStatus: Enabled
 microsoftHostedNetworkEnableStatus: Enabled
 installAzureMonitorAgentEnableStatus: Enabled
 identity:
-  type: None
+  type: SystemAssigned
   userAssignedIdentities: []
 catalogs:
   - name: catalog
     type: gitHub
-    uri: http://www.path.com
+    uri: https://github.com/Evilazaro/IdentityProvider.git
     branch: main
     path: ./devcenter.schema.json
   - name: catalog2
     type: gitHub
-    uri: http://www.path2.com
+    uri: https://github.com/Evilazaro/IdentityProvider.git
     branch: main
     path: ./devcenter.schema.json

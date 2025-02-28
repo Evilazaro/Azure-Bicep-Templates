@@ -5,7 +5,7 @@ param settings Settings
 param identity Identity
 
 @description('Cataglogs')
-param catalogs Catalog
+param catalogs Catalog[]
 
 @description('Dev Center Settings')
 type Settings = {
@@ -18,19 +18,19 @@ type Settings = {
 
 @description('Dev Center Identity')
 type Identity = {
-  type: string
+  type: IdentityType
 }
 
+type IdentityType = 'SystemAssigned' | 'UserAssigned' | 'None' | 'SystemAssigned, UserAssigned'
+
 @description('Cataglogs')
-type Catalog = [
-  {
-    name: string
-    type: CatalogType
-    uri: string
-    branch: string
-    path: string
-  }
-]
+type Catalog = {
+  name: string
+  type: CatalogType
+  uri: string
+  branch: string
+  path: string
+}
 
 type CatalogType = 'gitHub' | 'adoGit'
 
@@ -73,5 +73,14 @@ module devCenterCatalogs 'catalog.bicep' = [
       type: catalog.type
       uri: catalog.uri
     }
+  }
+]
+
+output catalogs array = [
+  for (catalog, i) in catalogs: {
+    name: devCenterCatalogs[i].outputs.name
+    type: devCenterCatalogs[i].outputs.type
+    uri: devCenterCatalogs[i].outputs.uri
+    branch: devCenterCatalogs[i].outputs.branch
   }
 ]

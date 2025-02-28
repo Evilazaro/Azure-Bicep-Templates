@@ -44,7 +44,8 @@
           "enum": [
             "None",
             "SystemAssigned",
-            "UserAssigned"
+            "UserAssigned",
+            "SystemAssigned, UserAssigned"
           ]
         },
         "userAssignedIdentities": {
@@ -62,42 +63,48 @@
     "catalogs": {
       "type": "array",
       "description": "List of catalogs.",
+      "minItems": 1,
       "items": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string",
-            "description": "The name of the catalog."
-          },
-          "type": {
-            "type": "string",
-            "description": "The type of the catalog.",
-            "enum": [
-              "gitHub",
-              "adoGit"
-            ]
-          },
-          "uri": {
-            "type": "string",
-            "description": "The URI of the catalog."
-          },
-          "branch": {
-            "type": "string",
-            "description": "The branch of the catalog."
-          },
-          "path": {
-            "type": "string",
-            "description": "The path to the catalog."
-          }
-        },
-        "required": [
-          "name",
-          "type",
-          "uri",
-          "branch",
-          "path"
-        ]
+        "$ref": "#/definitions/catalog"
       }
+    }
+  },
+  "definitions": {
+    "catalog": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the catalog."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the catalog.",
+          "enum": [
+            "gitHub",
+            "adoGit"
+          ]
+        },
+        "uri": {
+          "type": "string",
+          "description": "The URI of the catalog."
+        },
+        "branch": {
+          "type": "string",
+          "description": "The branch of the catalog."
+        },
+        "path": {
+          "type": "string",
+          "description": "The path to the catalog."
+        }
+      },
+      "required": [
+        "name",
+        "type",
+        "uri",
+        "branch",
+        "path"
+      ]
     }
   },
   "required": [
