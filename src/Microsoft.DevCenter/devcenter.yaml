@@ -1,0 +1,10 @@
+# yaml-language-server: $schema=./devcenter.schema.json
+
+name: devcenter
+location: eastus
+catalogItemSyncEnableStatus: Enabled
+microsoftHostedNetworkEnableStatus: Enabled
+installAzureMonitorAgentEnableStatus: Enabled
+identity:
+  type: None
+  userAssignedIdentities: []

@@ -1,0 +1,85 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "Azure DevCenter Configuration",
+    "type": "object",
+    "properties": {
+        "name": {
+            "type": "string",
+            "description": "The name of the DevCenter."
+        },
+        "location": {
+            "type": "string",
+            "description": "The Azure region where the DevCenter is located."
+        },
+        "catalogItemSyncEnableStatus": {
+            "type": "string",
+            "description": "Enable catalogs per project.",
+            "enum": [
+                "Enabled",
+                "Disabled"
+            ]
+        },
+        "microsoftHostedNetworkEnableStatus": {
+            "type": "string",
+            "description": "Allow Microsoft hosted networks in projects.",
+            "enum": [
+                "Enabled",
+                "Disabled"
+            ]
+        },
+        "installAzureMonitorAgentEnableStatus": {
+            "type": "string",
+            "description": "Enable Azure Monitor agent installation.",
+            "enum": [
+                "Enabled",
+                "Disabled"
+            ]
+        },
+        "identity": {
+            "type": "object",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "description": "Identity type.",
+                    "enum": [
+                        "SystemAssigned",
+                        "UserAssigned",
+                        "None"
+                    ],
+                    "default": "None"
+                },
+                "userAssignedIdentities": {
+                    "type": "array",
+                    "description": "The list of user assigned identities.",
+                    "properties": {
+                        "userAssignedIdentities": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "required": [
+                        "type"
+                    ]
+                }
+            },
+            "description": "The identity of the DevCenter."
+        },
+        "tags": {
+            "type": "object",
+            "additionalProperties": {
+                "type": "string"
+            },
+            "description": "A set of tags associated with the DevCenter."
+        }
+    },
+    "required": [
+        "name",
+        "location",
+        "catalogItemSyncEnableStatus",
+        "microsoftHostedNetworkEnableStatus",
+        "installAzureMonitorAgentEnableStatus"
+    ],
+    "additionalProperties": false
+}
