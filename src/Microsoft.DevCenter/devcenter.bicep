@@ -46,7 +46,9 @@ type EnvironmentType = {
 type Project = {
   name: string
   description: string
+  catalogs: Catalog[]
   environmentTypes: ProjectEnvironmentType[]
+  tags: Tag
 }
 
 type ProjectEnvironmentType = {
@@ -140,6 +142,8 @@ module devCenterProjects 'project.bicep' = [
       name: project.name
       devCenterId: devcenter.id
       environmentTypes: project.environmentTypes
+      catalogs: project.catalogs
+      tags: project.tags
     }
   }
 ]
