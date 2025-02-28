@@ -8,3 +8,10 @@ installAzureMonitorAgentEnableStatus: Enabled
 identity:
   type: None
   userAssignedIdentities: []
+catalogs:
+  - name: catalog
+    path: http://www.path.com
+    sync: true
+  - name: catalog2
+    path: http://www.path2.com
+    sync: false

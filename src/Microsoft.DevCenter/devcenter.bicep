@@ -4,6 +4,9 @@ param settings Settings
 @description('Dev Center Identity')
 param identity Identity
 
+@description('Dev Center Catalogs')
+param catalogs Catalog
+
 @description('Dev Center Settings')
 type Settings = {
   name: string
@@ -17,6 +20,14 @@ type Settings = {
 type Identity = {
   type: string
 }
+
+type Catalog = [
+  {
+    name: string
+    path: string
+    sync: bool
+  }
+]
 
 @description('Dev Center Resource')
 resource devcenter 'Microsoft.DevCenter/devcenters@2024-10-01-preview' = {

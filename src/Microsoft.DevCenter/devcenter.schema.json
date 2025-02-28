@@ -1,15 +1,15 @@
 {
     "$schema": "http://json-schema.org/draft-07/schema#",
-    "title": "Azure DevCenter Configuration",
+    "title": "DevCenter Configuration",
     "type": "object",
     "properties": {
         "name": {
             "type": "string",
-            "description": "The name of the DevCenter."
+            "description": "The name of the Dev Center."
         },
         "location": {
             "type": "string",
-            "description": "The Azure region where the DevCenter is located."
+            "description": "The location of the Dev Center."
         },
         "catalogItemSyncEnableStatus": {
             "type": "string",
@@ -21,7 +21,7 @@
         },
         "microsoftHostedNetworkEnableStatus": {
             "type": "string",
-            "description": "Allow Microsoft hosted networks in projects.",
+            "description": "Enable Microsoft hosted network.",
             "enum": [
                 "Enabled",
                 "Disabled"
@@ -29,7 +29,7 @@
         },
         "installAzureMonitorAgentEnableStatus": {
             "type": "string",
-            "description": "Enable Azure Monitor agent installation.",
+            "description": "Enable installation of Azure Monitor Agent.",
             "enum": [
                 "Enabled",
                 "Disabled"
@@ -40,38 +40,50 @@
             "properties": {
                 "type": {
                     "type": "string",
-                    "description": "Identity type.",
+                    "description": "The type of identity.",
                     "enum": [
+                        "None",
                         "SystemAssigned",
-                        "UserAssigned",
-                        "None"
-                    ],
-                    "default": "None"
+                        "UserAssigned"
+                    ]
                 },
                 "userAssignedIdentities": {
                     "type": "array",
-                    "description": "The list of user assigned identities.",
-                    "properties": {
-                        "userAssignedIdentities": {
-                            "type": "object",
-                            "additionalProperties": {
-                                "type": "string"
-                            }
-                        }
-                    },
-                    "required": [
-                        "type"
-                    ]
+                    "description": "List of user-assigned identities.",
+                    "items": {
+                        "type": "string"
+                    }
                 }
             },
-            "description": "The identity of the DevCenter."
+            "required": [
+                "type"
+            ]
         },
-        "tags": {
-            "type": "object",
-            "additionalProperties": {
-                "type": "string"
-            },
-            "description": "A set of tags associated with the DevCenter."
+        "catalogs": {
+            "type": "array",
+            "description": "List of catalogs.",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "The name of the catalog."
+                    },
+                    "path": {
+                        "type": "string",
+                        "description": "The path to the catalog."
+                    },
+                    "sync": {
+                        "type": "boolean",
+                        "description": "Whether the catalog is synchronized."
+                    }
+                },
+                "required": [
+                    "name",
+                    "path",
+                    "sync"
+                ]
+            }
         }
     },
     "required": [
@@ -79,7 +91,8 @@
         "location",
         "catalogItemSyncEnableStatus",
         "microsoftHostedNetworkEnableStatus",
-        "installAzureMonitorAgentEnableStatus"
-    ],
-    "additionalProperties": false
+        "installAzureMonitorAgentEnableStatus",
+        "identity",
+        "catalogs"
+    ]
 }

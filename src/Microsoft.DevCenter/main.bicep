@@ -21,6 +21,7 @@ module devCenter 'devcenter.bicep' = {
   params: {
     settings: devCenterSettings
     identity: devCenterSettings.identity
+    catalogs: devCenterSettings.catalogs
   }
 }
 
