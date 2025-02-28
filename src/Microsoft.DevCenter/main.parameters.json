@@ -3,7 +3,7 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
     "rgName": {
-      "value": "myDevCenter3-rg"
+      "value": "myDevCenter4-rg"
     },
     "environmentName": {
       "value": "${AZURE_ENV_NAME}"

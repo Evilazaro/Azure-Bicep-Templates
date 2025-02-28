@@ -1,6 +1,6 @@
 # yaml-language-server: $schema=./devcenter.schema.json
 
-name: devcenter3
+name: devcenter4
 location: eastus2
 catalogItemSyncEnableStatus: Enabled
 microsoftHostedNetworkEnableStatus: Enabled
