@@ -3,6 +3,7 @@ module storageAccount './storage-account.bicep' = {
   name: 'deploy-storage-account'
   params: {
     name: 'azurebiceptempstorage'
+    location: resourceGroup().location
   }
 }
 
@@ -11,9 +12,9 @@ module blobContainer './storage-blob-container.bicep' = {
   name: 'deploy-storage-blob-container'
   params: {
     name: 'mycontainer'
-    storageAccountName: storageAccount.outputs.AZURE_STORAGE_ACCOUNT_NAME
+    storageAccountName: storageAccount.outputs.storageAccountName
   }
 }
 
 @description('The name of the storage account.')
-output AZURE_STORAGE_ACCOUNT_NAME string = storageAccount.outputs.AZURE_STORAGE_ACCOUNT_NAME
+output AZURE_STORAGE_ACCOUNT_NAME string = storageAccount.outputs.storageAccountName

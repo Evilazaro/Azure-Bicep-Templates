@@ -2,7 +2,7 @@
 @maxLength(24)
 param name string
 
-param location string = resourceGroup().location
+param location string
 
 @allowed([
   'Standard_LRS'
@@ -103,6 +103,8 @@ param enableTableService bool = true
 ])
 param accessTier string = 'Hot'
 
+param tags object = {}
+
 resource storageAccount 'Microsoft.Storage/storageAccounts@2025-01-01' = {
   name: name
   location: location
@@ -150,7 +152,8 @@ resource storageAccount 'Microsoft.Storage/storageAccounts@2025-01-01' = {
     }
     accessTier: accessTier
   }
+  tags: tags
 }
 
 @description('The name of the storage account.')
-output AZURE_STORAGE_ACCOUNT_NAME string = storageAccount.name
+output storageAccountName string = storageAccount.name
